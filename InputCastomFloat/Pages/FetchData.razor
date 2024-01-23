@@ -1,13 +1,1 @@
 ﻿@page "/fetchdata"
-
-<a href="https://www.meziantou.net"
-   @onclick="OnAnchorClick"
-   @onclick:preventDefault="preventDefault">
-    Sample
-</a>
-
-@code {
-    bool preventDefault = false;
-    void OnAnchorClick() => Console.WriteLine("Anchor click");
-    void OnDivClick() => Console.WriteLine("Div click"); // Won't be triggered if stopPropagation is set to true
-}
