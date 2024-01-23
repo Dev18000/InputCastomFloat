@@ -1,0 +1,43 @@
+﻿@page "/"
+
+<input step="any" type="text" inputmode="tel" min="0" @bind="@someObject.SomeValue"
+       @oninput="ValidateInput" class="someCss" pattern="@pattern" />
+
+<div style="color: red;">@errorMessage</div>
+
+@code {
+    private SomeModel someObject = new SomeModel();
+    private string errorMessage = "";
+    string pattern = @"^[0-9]+([,.][0-9]+)?$";
+    private void ValidateInput(ChangeEventArgs args)
+    {
+        string inputValue = args.Value?.ToString();
+
+
+        if (!System.Text.RegularExpressions.Regex.IsMatch(inputValue, pattern))
+        {
+            errorMessage = "Введите верный формат";
+        }
+        else
+        {
+            errorMessage = "";
+
+            // ...
+        }
+    }
+
+    public class SomeModel
+    {
+        public string SomeValue { get; set; }
+    }
+}
+
+<style>
+    .someCss:invalid {
+        border: red solid 3px;
+    }
+
+    .someCss {
+        width: 100px;
+    }
+</style>

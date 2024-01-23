@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputCastomFloat", "InputCastomFloat\InputCastomFloat.csproj", "{61C04C78-1C34-47D9-829D-65BF78CEE600}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61C04C78-1C34-47D9-829D-65BF78CEE600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61C04C78-1C34-47D9-829D-65BF78CEE600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61C04C78-1C34-47D9-829D-65BF78CEE600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61C04C78-1C34-47D9-829D-65BF78CEE600}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {286FC5EE-2013-4260-A292-5A79F924AA4B}
+	EndGlobalSection
+EndGlobal
