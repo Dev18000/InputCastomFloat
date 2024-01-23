@@ -15,7 +15,7 @@
     {
         string inputValue = args.Value?.ToString();
 
-        if (!float.TryParse(inputValue, out float floatValue) || !float.IsNormal(floatValue))
+        if (!float.TryParse(inputValue, out float floatValue))
         {
             errorMessage = "Введите верный формат";
         }
