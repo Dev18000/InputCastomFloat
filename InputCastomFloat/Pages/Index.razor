@@ -13,15 +13,15 @@
 
     private void ValidateInput(ChangeEventArgs args)
     {
-        float outPutF;
-        var toto = float.TryParse(args.Value?.ToString(), out outPutF);
-        if (float.IsNormal(outPutF))
+        string inputValue = args.Value?.ToString();
+
+        if (!float.TryParse(inputValue, out float floatValue) || !float.IsNormal(floatValue))
         {
-            errorMessage = "";
+            errorMessage = "Введите верный формат";
         }
         else
         {
-            errorMessage = "Введите верный формат";
+            errorMessage = "";
         }
     }
 
