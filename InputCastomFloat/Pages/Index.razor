@@ -1,7 +1,7 @@
 ﻿@page "/"
 
 <input step="any" type="text" inputmode="tel" min="0" @bind="@someObject.SomeValue"
-       @oninput="ValidateInput" class="someCss" pattern="@pattern" />
+       @oninput="ValidateInput" class="someCss" pattern="@pattern" @onkeypress="KeyPressHandler" />
 
 <div style="color: red;">@errorMessage</div>
 
@@ -26,9 +26,20 @@
         }
     }
 
+    private void KeyPressHandler(KeyboardEventArgs args)
+    {
+        string pressedKey = args.Key;
+
+        if (!char.IsDigit(pressedKey[0]) && pressedKey != "." && pressedKey != ",")
+        {
+            // args.PreventDefault(); // думаю запретить пользователю вводить, но для этого нужно применить js, 
+            // а Blazor подрузамевает НЕ использования Js
+        }
+    }
+
     public class SomeModel
     {
-        public string SomeValue { get; set; }
+        public float SomeValue { get; set; }
     }
 }
 
