@@ -1,28 +1,27 @@
 ﻿@page "/"
 
 <input step="any" type="text" inputmode="tel" min="0" @bind="@someObject.SomeValue"
-       @oninput="ValidateInput" class="someCss" pattern="@pattern" @onkeypress="KeyPressHandler" />
+       @oninput="ValidateInput" class="someCss" pattern="@pattern" />
 
 <div style="color: red;">@errorMessage</div>
 
 @code {
+    bool prohibitSeize = false;
     private SomeModel someObject = new SomeModel();
     private string errorMessage = "";
     string pattern = @"^[0-9]+([,.][0-9]+)?$";
+
     private void ValidateInput(ChangeEventArgs args)
     {
-        string inputValue = args.Value?.ToString();
-
-
-        if (!System.Text.RegularExpressions.Regex.IsMatch(inputValue, pattern))
+        float outPutF;
+        var toto = float.TryParse(args.Value?.ToString(), out outPutF);
+        if (float.IsNormal(outPutF))
         {
-            errorMessage = "Введите верный формат";
+            errorMessage = "";
         }
         else
         {
-            errorMessage = "";
-
-            // ...
+            errorMessage = "Введите верный формат";
         }
     }
 
@@ -32,7 +31,7 @@
 
         if (!char.IsDigit(pressedKey[0]) && pressedKey != "." && pressedKey != ",")
         {
-            // args.PreventDefault(); // думаю запретить пользователю вводить, но для этого нужно применить js, 
+            // args.PreventDefault(); // думаю запретить пользователю вводить, но для этого нужно применить js,
             // а Blazor подрузамевает НЕ использования Js
         }
     }
