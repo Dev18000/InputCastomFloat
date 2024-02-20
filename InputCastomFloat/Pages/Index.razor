@@ -1,15 +1,14 @@
 ﻿@page "/"
 
-<input step="any" type="text" inputmode="tel" min="0" @bind="@someObject.SomeValue"
-       @oninput="ValidateInput" class="someCss" pattern="@pattern" />
+<input step="any" type="text" inputmode="numeric" min="0" @bind="@someObject.SomeValue"
+       @oninput="ValidateInput" pattern="[0-9]*([,.][0-9]+)?"
+       title="Введите число" class="numeric-input" maxlength="10" />
 
-<div style="color: red;">@errorMessage</div>
+<div class="error-message">@errorMessage</div>
 
 @code {
-    bool prohibitSeize = false;
     private SomeModel someObject = new SomeModel();
     private string errorMessage = "";
-    string pattern = @"^[0-9]+([,.][0-9]+)?$";
 
     private void ValidateInput(ChangeEventArgs args)
     {
@@ -43,11 +42,20 @@
 }
 
 <style>
-    .someCss:invalid {
+    .numeric-input:invalid {
         border: red solid 3px;
     }
 
-    .someCss {
+    .numeric-input {
         width: 100px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .error-message {
+        color: red;
+        margin-top: 4px;
     }
 </style>
