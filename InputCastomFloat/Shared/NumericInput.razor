@@ -1,0 +1,43 @@
+﻿@typeparam TModel
+<input step="any" type="text" inputmode="numeric"
+       value="@Value"
+       @oninput="HandleInput"
+       @onkeypress="KeyPressHandler"
+       pattern="[0-9]*([,.][0-9]+)?"
+       title="@Title" class="numeric-input" maxlength="10" />
+
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+        <div class="error-message">@ErrorMessage</div>
+}
+
+@code {
+    [Parameter] public string Title { get; set; } = "Введите число";
+    [Parameter] public string Value { get; set; }
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+    [Parameter] public string ErrorMessage { get; set; }
+
+    private async Task HandleInput(ChangeEventArgs args)
+    {
+        string inputValue = args.Value?.ToString() ?? "";
+        inputValue = inputValue.Replace(',', '.');
+
+        if (!float.TryParse(inputValue, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out float _))
+        {
+            ErrorMessage = "Введите верный формат";
+        }
+        else
+        {
+            ErrorMessage = "";
+        }
+        await ValueChanged.InvokeAsync(inputValue);
+    }
+
+    private void KeyPressHandler(KeyboardEventArgs args)
+    {
+        if (args.Key.Length == 1 && !char.IsDigit(args.Key[0]) && args.Key != "." && args.Key != ",")
+        {
+            args.PreventDefault();
+        }
+    }
+}
