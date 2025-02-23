@@ -1,69 +1,14 @@
-﻿@page "/"
+﻿@using InputCastomFloat.Shared
+@page "/"
 
-<input step="any" type="text" inputmode="numeric" min="0"
-       @bind="@someObject.SomeValue"
-       @oninput="ValidateInput"
-       @onkeypress="KeyPressHandler"
-       pattern="[0-9]*([,.][0-9]+)?"
-       title="Введите число" class="numeric-input" maxlength="10" />
-
-<div class="error-message">@errorMessage</div>
+<NumericInput Title="Введите число" Value="@value" ValueChanged="OnValueChanged" ErrorMessage="@errorMessage" />
 
 @code {
-    private SomeModel someObject = new SomeModel();
+    private string value = "";
     private string errorMessage = "";
 
-    private void ValidateInput(ChangeEventArgs args)
+    private void OnValueChanged(string newValue)
     {
-        string inputValue = args.Value?.ToString() ?? "";
-
-        if (string.IsNullOrWhiteSpace(inputValue))
-        {
-            errorMessage = "";
-            return;
-        }
-
-        inputValue = inputValue.Replace(',', '.');
-
-        if (!float.TryParse(inputValue, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out float floatValue))
-        {
-            errorMessage = "Введите верный формат";
-        }
-        else
-        {
-            errorMessage = "";
-        }
-    }
-
-    private void KeyPressHandler(KeyboardEventArgs args)
-    {
-        if (args.Key.Length == 1 && !char.IsDigit(args.Key[0]) && args.Key != "." && args.Key != ",")
-        {
-            args.PreventDefault();
-        }
-    }
-
-    public class SomeModel
-    {
-        public float SomeValue { get; set; }
+        value = newValue;
     }
 }
-
-<style>
-    .numeric-input:invalid {
-        border: red solid 3px;
-    }
-
-    .numeric-input {
-        width: 100px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    .error-message {
-        color: red;
-        margin-top: 4px;
-    }
-</style>

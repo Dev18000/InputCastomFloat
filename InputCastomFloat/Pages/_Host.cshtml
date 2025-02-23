@@ -28,6 +28,23 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+    <script>
+        function keyPressHandler(event) {
+            const key = event.key;
+            if (key.length === 1 && !/\d/.test(key) && key !== '.' && key !== ',') {
+                event.preventDefault();
+                return false;
+            }
+            return true;
+        }
+
+        function attachKeyPressHandler(elementId) {
+            var element = document.getElementById(elementId);
+            if (element) {
+                element.addEventListener('keypress', keyPressHandler);
+            }
+        }
+    </script>
 
     <script src="_framework/blazor.server.js"></script>
 </body>
